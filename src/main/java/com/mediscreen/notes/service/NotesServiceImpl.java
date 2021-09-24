@@ -13,7 +13,7 @@ public class NotesServiceImpl implements NotesService {
 
 
     @Override
-    public List<Notes> findALlNotes() {
+    public List<Notes> findAllNotes() {
         return null;
     }
 

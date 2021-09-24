@@ -10,7 +10,7 @@ public interface NotesService {
 
     // CRUD
     // Get - Read
-    List<Notes> findALlNotes();
+    List<Notes> findAllNotes();
     Notes findNotesById(Long id);
 
 
