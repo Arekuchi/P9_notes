@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface NotesDAO extends JpaRepository<Notes, Long> {
 
 
+    Notes findNotesById(Long id);
+
+
 }

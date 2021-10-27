@@ -17,7 +17,7 @@ public interface NotesService {
     // CUD - Create / Update / Delete
     Notes saveNotes(Notes notes);
     Boolean deleteNotes(Notes notes);
-    Notes updateNotes(Long id, Notes notes);
+    Notes updateNotes(Notes notes);
 
 
 

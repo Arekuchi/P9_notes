@@ -1,11 +1,21 @@
 package com.mediscreen.notes.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "notes")
 public class Notes {
 
     // fields
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "patientID")
     private Long patientId;
+    @Column(name = "notes")
     private String notes;
 
 
@@ -14,7 +24,7 @@ public class Notes {
     public Notes() {
     }
 
-    public Notes(String id, Long patientId, String notes) {
+    public Notes(Long id, Long patientId, String notes) {
         this.id = id;
         this.patientId = patientId;
         this.notes = notes;
@@ -22,11 +32,11 @@ public class Notes {
 
     // getter & setter
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

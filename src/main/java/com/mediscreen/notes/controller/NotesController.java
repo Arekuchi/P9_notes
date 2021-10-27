@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class NotesController {
 
@@ -35,7 +36,7 @@ public class NotesController {
     @PostMapping(value = "/notesSave", produces = MediaType.APPLICATION_JSON_VALUE)
     public Notes notesSave(@RequestBody Notes notes) {
         notesService.saveNotes(notes);
-        Notes newNotes = notesService.findNotesById(notes.getPatientId());
+        Notes newNotes = notesService.findNotesById(notes.getId());
 
         return newNotes;
     }
@@ -50,9 +51,9 @@ public class NotesController {
     // UPDATE
 
     @PutMapping(value = "/notesUpdate/{id}")
-    public Notes notesUpdate(@PathVariable Long id, @RequestBody Notes notes) {
+    public Notes notesUpdate(@RequestBody Notes notes) {
 
-        return notesService.updateNotes(id, notes);
+        return notesService.updateNotes(notes);
     }
 
 
