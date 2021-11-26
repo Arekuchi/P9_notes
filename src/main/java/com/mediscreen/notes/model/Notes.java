@@ -1,21 +1,33 @@
 package com.mediscreen.notes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "notes")
+
+
+@Document(collection = "notes")
 public class Notes {
 
     // fields
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Field("_id")
+//    @JsonIgnore
+    private String objectId;
+
+
+//    @Id
+    @Indexed
+    @Field(name = "id")
     private Long id;
 
-    @Column(name = "patientID")
+    @Field(name = "patientId")
     private Long patientId;
-    @Column(name = "notes")
+    @Field(name = "notes")
     private String notes;
 
 
@@ -54,5 +66,13 @@ public class Notes {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        objectId = objectId;
     }
 }

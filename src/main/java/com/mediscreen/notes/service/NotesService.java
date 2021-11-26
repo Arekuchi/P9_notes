@@ -12,12 +12,15 @@ public interface NotesService {
     // Get - Read
     List<Notes> findAllNotes();
     Notes findNotesById(Long id);
+    List<Notes> findNotesByPatientId(Long patientId);
+
 
 
     // CUD - Create / Update / Delete
     Notes saveNotes(Notes notes);
     Boolean deleteNotes(Notes notes);
-    Notes updateNotes(Notes notes);
+    Notes updateNotes(Long id, Notes notes);
+
 
 
 

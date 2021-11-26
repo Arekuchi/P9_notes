@@ -1,14 +1,20 @@
 package com.mediscreen.notes.DAO;
 
 import com.mediscreen.notes.model.Notes;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface NotesDAO extends JpaRepository<Notes, Long> {
+public interface NotesDAO extends MongoRepository<Notes, Long> {
 
 
-    Notes findNotesById(Long id);
+    Notes findNotesById(@Param("id") Long id);
+    
 
+    List<Notes> findNotesByPatientId(Long patientId);
 
+//    Boolean deleteNotesById(Long id);
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 public class NotesController {
 
@@ -26,9 +26,17 @@ public class NotesController {
 
     @GetMapping(value = "notesById/{id}")
     public Notes findNotesById(@PathVariable("id") Long id) {
-        Notes notes = notesService.findNotesById(id);
+        Notes note = notesService.findNotesById(id);
 
-        return notes;
+        return note;
+    }
+
+    @GetMapping(value = "notesByPatientId/{id}")
+    public List<Notes> findNotesByPatientId(@PathVariable("id") Long id) {
+
+        List<Notes> notesListByPatientId = notesService.findNotesByPatientId(id);
+
+        return notesListByPatientId;
     }
 
     // POST
@@ -44,16 +52,21 @@ public class NotesController {
     // DELETE
 
     @DeleteMapping(value = "/notesDelete/{id}")
-    public Boolean notesDelete(@PathVariable Long id) {
+    public Boolean notesDelete(@PathVariable(value = "id") Long id) {
+
+
         return notesService.deleteNotes(notesService.findNotesById(id));
     }
 
     // UPDATE
 
     @PutMapping(value = "/notesUpdate/{id}")
-    public Notes notesUpdate(@RequestBody Notes notes) {
+    public Notes notesUpdate(@PathVariable(value = "id") Long id, @RequestBody Notes notes) {
 
-        return notesService.updateNotes(notes);
+        Notes notesToUpdate = findNotesById(id);
+        notesToUpdate.setNotes(notes.getNotes());
+
+        return notesService.updateNotes(id, notesToUpdate);
     }
 
 
