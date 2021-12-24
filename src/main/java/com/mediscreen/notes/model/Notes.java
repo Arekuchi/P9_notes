@@ -14,16 +14,16 @@ public class Notes {
 
     // fields
 
-    @Id
-    @Field("_id")
-//    @JsonIgnore
-    private String objectId;
+//    @Id
+//    @Field("_id")
+////    @JsonIgnore
+//    private String objectId;
 
 
 //    @Id
-    @Indexed
-    @Field(name = "id")
-    private Long id;
+//    @Indexed
+    @Field(name = "_id")
+    private String id;
 
     @Field(name = "patientId")
     private Long patientId;
@@ -36,7 +36,7 @@ public class Notes {
     public Notes() {
     }
 
-    public Notes(Long id, Long patientId, String notes) {
+    public Notes(String id, Long patientId, String notes) {
         this.id = id;
         this.patientId = patientId;
         this.notes = notes;
@@ -44,11 +44,11 @@ public class Notes {
 
     // getter & setter
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -68,11 +68,11 @@ public class Notes {
         this.notes = notes;
     }
 
-    public String getObjectId() {
-        return objectId;
-    }
+//    public String getObjectId() {
+//        return objectId;
+//    }
 
-    public void setObjectId(String objectId) {
-        objectId = objectId;
-    }
+//    public void setObjectId(String objectId) {
+//        objectId = objectId;
+//    }
 }

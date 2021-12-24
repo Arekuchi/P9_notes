@@ -31,7 +31,7 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public Notes findNotesById(Long id) {
+    public Notes findNotesById(String id) {
 
         return notesDAO.findNotesById(id);
     }
@@ -46,9 +46,13 @@ public class NotesServiceImpl implements NotesService {
     @Override
     public Notes saveNotes(Notes notes) {
 
-        List<Notes> notesList = findAllNotes();
-        Notes lastNotes = notesList.get(notesList.size()-1);
-        notes.setId(lastNotes.getId()+1);
+        Notes lastNotes = notesDAO.findTopByOrderByIdDesc();
+        Long max = 0l;
+        if (lastNotes != null) {
+            max = new Long(lastNotes.getId());
+        }
+        notes.setId((max + 1) +"");
+
 
 
         return notesDAO.save(notes);
@@ -72,7 +76,7 @@ public class NotesServiceImpl implements NotesService {
 
     // UPDATE - PUT
     @Override
-    public Notes updateNotes(Long id, Notes notes) {
+    public Notes updateNotes(String id, Notes notes) {
 
 
         return notesDAO.save(notes);

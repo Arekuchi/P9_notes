@@ -11,7 +11,7 @@ public interface NotesService {
     // CRUD
     // Get - Read
     List<Notes> findAllNotes();
-    Notes findNotesById(Long id);
+    Notes findNotesById(String id);
     List<Notes> findNotesByPatientId(Long patientId);
 
 
@@ -19,7 +19,7 @@ public interface NotesService {
     // CUD - Create / Update / Delete
     Notes saveNotes(Notes notes);
     Boolean deleteNotes(Notes notes);
-    Notes updateNotes(Long id, Notes notes);
+    Notes updateNotes(String id, Notes notes);
 
 
 

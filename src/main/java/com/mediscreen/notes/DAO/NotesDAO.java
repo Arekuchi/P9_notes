@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NotesDAO extends MongoRepository<Notes, Long> {
+public interface NotesDAO extends MongoRepository<Notes, String> {
 
 
-    Notes findNotesById(@Param("id") Long id);
+    Notes findNotesById(@Param("id") String id);
     
+    Notes findTopByOrderByIdDesc();
 
     List<Notes> findNotesByPatientId(Long patientId);
 
