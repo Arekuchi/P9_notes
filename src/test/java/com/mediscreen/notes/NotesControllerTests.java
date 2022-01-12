@@ -1,9 +1,9 @@
 package com.mediscreen.notes;
 
-import com.mediscreen.notes.DAO.NotesDAO;
-import com.mediscreen.notes.controller.NotesController;
-import com.mediscreen.notes.model.Notes;
-import com.mediscreen.notes.service.NotesService;
+//import com.mediscreen.notes.DAO.NotesDAO;
+//import com.mediscreen.notes.controller.NotesController;
+//import com.mediscreen.notes.model.Notes;
+//import com.mediscreen.notes.service.NotesService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,40 +22,40 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+//@ExtendWith(SpringExtension.class)
+//@SpringBootTest
+//@AutoConfigureMockMvc
 class NotesControllerTests {
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
-	@Autowired
-	MockMvc mockMvc;
-
-	@Autowired
-	NotesService notesService;
-
-	@MockBean
-	NotesDAO notesDAO;
-
-	@MockBean
-	NotesController notesController;
+//	@Autowired
+//	MockMvc mockMvc;
+//
+//	@Autowired
+//	NotesService notesService;
+//
+//	@MockBean
+//	NotesDAO notesDAO;
+//
+//	@MockBean
+//	NotesController notesController;
 
 	Long notesIdTest = 1L;
 	Long patientIdTest = 4L;
 	Date dateTest = Date.valueOf(LocalDate.now());
 
-	List<Notes> notesList = new ArrayList<>();
+//	List<Notes> notesList = new ArrayList<>();
 //	Notes notesTest = new Notes(notesIdTest, patientIdTest, "notes string patient test");
 
 	@Test
 	public void findAllNotesTest() {
 
-		when(notesController.findAllNotes()).thenReturn(notesList);
-		notesController.findAllNotes();
-		verify(notesController, times(1)).findAllNotes();
+//		when(notesController.findAllNotes()).thenReturn(notesList);
+//		notesController.findAllNotes();
+//		verify(notesController, times(1)).findAllNotes();
 	}
 
 	@Test
