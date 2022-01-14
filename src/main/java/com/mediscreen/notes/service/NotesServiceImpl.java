@@ -20,7 +20,7 @@ public class NotesServiceImpl implements NotesService {
     @Autowired
     private NotesDAO notesDAO;
 
-    MongoClient mongo = MongoClients.create("mongodb://127.0.0.1:27017");
+    MongoClient mongo = MongoClients.create("mongodb://notesdb:27017");
     MongoDatabase db = mongo.getDatabase("notes");
     MongoCollection<Document> collection = db.getCollection("notes");
 
