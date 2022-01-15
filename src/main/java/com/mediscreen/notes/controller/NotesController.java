@@ -1,5 +1,6 @@
 package com.mediscreen.notes.controller;
 
+import com.mediscreen.notes.DAO.NotesDAO;
 import com.mediscreen.notes.model.Notes;
 import com.mediscreen.notes.service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin(origins = "http://localhost/")
 @RestController
@@ -14,6 +16,9 @@ public class NotesController {
 
     @Autowired
     private NotesService notesService;
+
+    @Autowired
+    private NotesDAO notesDao;
 
     // GET
 
@@ -54,8 +59,19 @@ public class NotesController {
     @DeleteMapping(value = "/notesDelete/{id}")
     public Boolean notesDelete(@PathVariable(value = "id") String id) {
 
+        Notes note = notesService.findNotesById(id);
 
-        return notesService.deleteNotes(notesService.findNotesById(id));
+
+        if (Objects.isNull(note)) {
+            System.out.println("note vide");
+        } else {
+            System.out.println("suppression de la note");
+            notesDao.deleteNotesById(note.getId());
+        }
+
+
+
+        return true;
     }
 
     // UPDATE
@@ -63,10 +79,13 @@ public class NotesController {
     @PutMapping(value = "/notesUpdate/{id}")
     public Notes notesUpdate(@PathVariable(value = "id") String id, @RequestBody Notes notes) {
 
-        Notes notesToUpdate = findNotesById(id);
+        Notes notesToUpdate = notesDao.findNotesById(id);
+//        notesToUpdate.setId(id);
         notesToUpdate.setNotes(notes.getNotes());
+//        notes.setId(id);
 
-        return notesService.updateNotes(id, notesToUpdate);
+
+        return notesDao.save(notesToUpdate);
     }
 
 

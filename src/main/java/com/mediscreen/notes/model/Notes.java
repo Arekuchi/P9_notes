@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import javax.persistence.*;
 
@@ -19,11 +20,11 @@ public class Notes {
 ////    @JsonIgnore
 //    private String objectId;
 
-
-//    @Id
-//    @Indexed
+    //    @Indexed
+    @MongoId
     @Field(name = "_id")
     private String id;
+
 
     @Field(name = "patientId")
     private Long patientId;
