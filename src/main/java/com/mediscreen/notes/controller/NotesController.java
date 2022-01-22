@@ -22,6 +22,10 @@ public class NotesController {
 
     // GET
 
+    /**
+     * Méthode pour renvoyer la liste complète des Notes en base de donnée.
+     * @return
+     */
     @GetMapping(value = "/notesList")
     public List<Notes> findAllNotes() {
         List<Notes> notesList = notesService.findAllNotes();
@@ -29,6 +33,11 @@ public class NotesController {
         return notesList;
     }
 
+    /**
+     * Méthode pour renvoyer une seule Notes en la cherchant depuis son ID
+     * @param id
+     * @return
+     */
     @GetMapping(value = "notesById/{id}")
     public Notes findNotesById(@PathVariable("id") String id) {
         Notes note = notesService.findNotesById(id);
@@ -36,6 +45,11 @@ public class NotesController {
         return note;
     }
 
+    /**
+     * Méthode pour renvoyer la liste de toutes les Notes appartenant à un Patient depuis l'ID de ce dernier
+     * @param id
+     * @return
+     */
     @GetMapping(value = "notesByPatientId/{id}")
     public List<Notes> findNotesByPatientId(@PathVariable("id") Long id) {
 
@@ -46,6 +60,11 @@ public class NotesController {
 
     // POST
 
+    /**
+     * Méthode pour enregistrer une Notes en base de donnée
+     * @param notes
+     * @return
+     */
     @PostMapping(value = "/notesSave", produces = MediaType.APPLICATION_JSON_VALUE)
     public Notes notesSave(@RequestBody Notes notes) {
         notesService.saveNotes(notes);
@@ -56,6 +75,11 @@ public class NotesController {
 
     // DELETE
 
+    /**
+     * Méthode pour supprimer une Notes de la base de donnée
+     * @param id
+     * @return
+     */
     @DeleteMapping(value = "/notesDelete/{id}")
     public Boolean notesDelete(@PathVariable(value = "id") String id) {
 
@@ -76,13 +100,17 @@ public class NotesController {
 
     // UPDATE
 
+    /**
+     * Méthode pour mettre à jour une Notes
+     * @param id
+     * @param notes
+     * @return
+     */
     @PutMapping(value = "/notesUpdate/{id}")
     public Notes notesUpdate(@PathVariable(value = "id") String id, @RequestBody Notes notes) {
 
         Notes notesToUpdate = notesDao.findNotesById(id);
-//        notesToUpdate.setId(id);
         notesToUpdate.setNotes(notes.getNotes());
-//        notes.setId(id);
 
 
         return notesDao.save(notesToUpdate);

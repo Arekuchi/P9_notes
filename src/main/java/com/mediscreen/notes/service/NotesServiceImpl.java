@@ -22,22 +22,33 @@ public class NotesServiceImpl implements NotesService {
     @Autowired
     private NotesDAO notesDAO;
 
-//    MongoClient mongo = MongoClients.create("mongodb://localhost:27017");
-//    MongoDatabase db = mongo.getDatabase("mediscreen");
-//    MongoCollection<Document> collection = db.getCollection("notes");
 
     // READ - GET
+    /**
+     * Méthode pour renvoyer la liste de toutes les Notes présentes en base de donnée
+     * @return
+     */
     @Override
     public List<Notes> findAllNotes() {
         return notesDAO.findAll();
     }
 
+    /**
+     * Méthode pour renvoyer une Note présente en base de donnée en la cherchant par son ID
+     * @param id
+     * @return
+     */
     @Override
     public Notes findNotesById(String id) {
 
         return notesDAO.findNotesById(id);
     }
 
+    /**
+     * Méthode pour renvoyer toutes les Notes présente en base de donnée d'un Patient en la cherchant par l'ID de ce Patient
+     * @param id
+     * @return
+     */
     @Override
     public List<Notes> findNotesByPatientId(Long patientId) {
 
@@ -45,11 +56,15 @@ public class NotesServiceImpl implements NotesService {
     }
 
     // CREATE - POST
+
+    /**
+     * Méthode pour enregistrer une Note en base de donnée
+     * @param notes
+     * @return
+     */
     @Override
     public Notes saveNotes(Notes notes) {
 
-//        Notes lastNotes = notesDAO.findTopByOrderByIdDesc();
-        Notes lastNotes = notesDAO.findFirstByOrderByIdDesc();
         int notesId = notesDAO.findAll().size();
         Long max = 0l;
         if (lastNotes != null) {
@@ -57,12 +72,16 @@ public class NotesServiceImpl implements NotesService {
         }
         notes.setId((notesId + 1) +"");
 
-
-
         return notesDAO.save(notes);
     }
 
     // DELETE - DELETE
+
+    /**
+     * Méthode pour supprimer une Note de la base de donnée en la cherchant par son ID
+     * @param notes
+     * @return
+     */
     @Override
     public Boolean deleteNotes(Notes notes) {
 
@@ -71,12 +90,6 @@ public class NotesServiceImpl implements NotesService {
             Notes noteToDelete = notesDAO.findNotesById(notes.getId());
             notesDAO.deleteNotesById(noteToDelete.getId());
 
-
-//            System.out.println(notes);
-//            notesDAO.deleteNotesById(notes.getId());
-//            db.getCollection("notes").deleteOne(new Document("_id", notes.getId()));
-//            collection.deleteOne(new Document("_id", notes.getObjectId()));
-
             return true;
         }
 
@@ -84,11 +97,16 @@ public class NotesServiceImpl implements NotesService {
     }
 
     // UPDATE - PUT
+
+    /**
+     * Méthode pour mettre à jour une Notes en base de données en la cherchant avec son ID
+     * @param id
+     * @param notes
+     * @return
+     */
     @Override
     public Notes updateNotes(String id, Notes notes) {
-
-
-
+        //Mongo gère naturellement l'update via la méthode save lorsque l'ID existe déjà en base de donnée.
         return notesDAO.save(notes);
     }
 }

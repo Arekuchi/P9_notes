@@ -11,17 +11,11 @@ import java.util.List;
 @Repository
 public interface NotesDAO extends MongoRepository<Notes, String> {
 
-
     Notes findNotesById(@Param("id") String id);
-    
     Notes findTopByOrderByIdDesc();
     Notes findFirstByOrderByIdDesc();
 
     Long deleteNotesById(String id);
 
-
     List<Notes> findNotesByPatientId(Long patientId);
-
-
-//    Boolean deleteNotesById(String id);
 }
